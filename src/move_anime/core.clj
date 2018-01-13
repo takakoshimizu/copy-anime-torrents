@@ -84,7 +84,8 @@
         origin-path  (nth args 1)
         output-path  (nth args 2)
         new-filename (determine-filename filename)
-        new-path     (str output-path "/" new-filename)]
+        title        (item->title (xml->item filename))
+        new-path     (str output-path "/TV Shows" title "/" new-filename)]
     (do 
       (println (str "Copying " filename " to " new-path))
       (copy-file origin-path new-path))))
