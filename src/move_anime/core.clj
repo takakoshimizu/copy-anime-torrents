@@ -76,7 +76,9 @@
     (str title " - " (se-notation season episode) "." ext)))
 
 (defn copy-file [from to]
-  (io/copy (io/file from) (io/file to)))
+  (do
+    (io/make-parents to)
+    (io/copy (io/file from) (io/file to))))
 
 (defn -main
   [& args]
@@ -85,7 +87,7 @@
         output-path  (nth args 2)
         new-filename (determine-filename filename)
         title        (item->title (xml->item filename))
-        new-path     (str output-path "/TV Shows" title "/" new-filename)]
+        new-path     (str output-path "/TV Shows/" title "/" new-filename)]
     (do 
       (println (str "Copying " filename " to " new-path))
       (copy-file origin-path new-path))))
