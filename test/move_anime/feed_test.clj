@@ -54,11 +54,12 @@
      (let [folder (feed/item->folder {})]
        (is (nil? folder)))))
 
+
 (deftest item->title
   (testing "Returns the title of a given item."
     (let [title (feed/item->title test-item)]
-      (is (= "Citrus" title))
+      (is (= "Citrus" title))))
 
-     (testing "can override titles if necessary"
-       (let [title (feed/item->title test-title-item)]
-         (is (= "test override" title)))))))
+  (testing "can override titles if necessary"
+    (let [title (feed/item->title test-title-item)]
+      (is (= "test override" title)))))
