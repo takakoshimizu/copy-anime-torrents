@@ -40,8 +40,9 @@
   "Strips out all title and metadata from a filename to gather the episode number."
   [fn title]
   (let [titleless-fn (string/replace fn title "")
-        clean-fn (string/trim (string/replace titleless-fn #"\[[^\]]+\]" ""))]
-    (read-string (string/trim (string/replace clean-fn #"[^\d]" "")))))
+        clean-fn     (string/trim (string/replace titleless-fn #"\[[^\]]+\]" ""))
+        digits-only  (string/trim (string/replace clean-fn #"[^\d]" ""))]
+    (read-string (string/trim (string/replace digits-only #"^0+" "")))))
 
 
 (defn leading-zero 
