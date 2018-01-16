@@ -17,7 +17,7 @@
     (xml/parse)))
 
 
-(defn- find-tag 
+(defn find-tag 
   "Finds a particular named tag in a list of XML siblings."
   [tags tag-name]
   (if-let [tag (keep #(when (= (:tag %) tag-name) %) tags)]

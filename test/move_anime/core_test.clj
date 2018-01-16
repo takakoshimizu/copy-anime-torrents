@@ -1,7 +1,3 @@
-(ns move-anime.core-test
-  (:require [clojure.test :refer :all]
-            [move-anime.core :refer :all]))
+(ns move-anime.core-test)
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
