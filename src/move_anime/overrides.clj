@@ -9,4 +9,5 @@
 
 ; When a season isn't season 1, override here by KW-ized title.
 (def seasons
-  {:cardcaptor-sakura--clear-card-hen 4})
+  {:cardcaptor-sakura--clear-card-hen 4
+   :nanatsu-no-taizai--imashime-no-fukkatsu 2})
