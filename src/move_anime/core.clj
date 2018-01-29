@@ -58,8 +58,9 @@
         origin-path  (nth args 1)
         output-path  (nth args 2)
         xml-item     (feed/xml->item cur-feed filename)]
-    (if (fs/file? origin-path)
-      (if xml-item
-        (move-episode filename origin-path output-path)
-        (move-movie filename origin-path output-path))
-      (println (str "Unable to move " filename " as it is a full folder of items.")))))
+    (println (str "Filename: " filename))
+    (println (str "Origin: " origin-path))
+    (println (str xml-item))
+    (if xml-item
+      (move-episode filename origin-path output-path)
+      (move-movie filename origin-path output-path))))
