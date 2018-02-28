@@ -1,6 +1,7 @@
 (ns move-anime.core
   (:use clojure.data.zip.xml)
-  (:require [move-anime.feed :as feed]
+  (:require [clojure.tools.logging :as log]
+            [move-anime.feed :as feed]
             [move-anime.util :as util]
             [me.raynes.fs    :as fs])
   (:gen-class))
@@ -28,20 +29,22 @@
   [filename origin-path output-path]
   (try
     (do 
-      (println (str "Copying " filename " to " output-path))
+      (log/info (str "Copying " filename " to " output-path))
       (util/copy-file origin-path output-path))
     (catch Exception e
       (do 
-        (println (str "Unable to move file " filename))
-        (println (str "Caught exception: " (.getMessage e)))))))
+        (log/error (str "Unable to move file " filename))
+        (log/error (str "Caught exception: " (.getMessage e)))))))
 
 
 (defn move-episode
   "Moves a single episode."
   [filename origin-path output-path]
   (let [new-filename (determine-filename filename cur-feed)
-        title        (feed/item->title (feed/xml->item cur-feed filename))
-        new-path     (str output-path "/TV Shows/" title "/" new-filename)]
+        item         (feed/xml->item cur-feed filename)
+        title        (feed/item->title item)
+        season       (feed/item->season item)
+        new-path     (str output-path "/TV Shows/" season "/" title "/" new-filename)]
     (move-file filename origin-path new-path)))
 
 
@@ -58,9 +61,9 @@
         origin-path  (nth args 1)
         output-path  (nth args 2)
         xml-item     (feed/xml->item cur-feed filename)]
-    (println (str "Filename: " filename))
-    (println (str "Origin: " origin-path))
-    (println (str xml-item))
+    (log/info (str "Filename: " filename))
+    (log/info (str "Origin: " origin-path))
+    (log/info (str xml-item))
     (if xml-item
       (move-episode filename origin-path output-path)
       (move-movie filename origin-path output-path))))

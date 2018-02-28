@@ -66,3 +66,15 @@
       (string/split #"/") 
       (nth 1)
       (util/clean-title))))
+
+
+(defn item->season
+  "Retrieves the season from the folder definition."
+  [item]
+  (let [folder (item->folder item)]
+    (->
+      folder
+      (string/split #"/")
+      (first))))
+  
+
