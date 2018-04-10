@@ -1,13 +1,13 @@
 (ns move-anime.overrides)
 
+(def- overrides (read-string (slurp "overrides.edn")))
 
 ; Sometimes titles have to be overridden for Plex.
 (def titles 
-  {:testing "test override"})
+  (:titles overrides))
 
 
 
 ; When a season isn't season 1, override here by KW-ized title.
 (def seasons
-  {:cardcaptor-sakura--clear-card-hen 4
-   :nanatsu-no-taizai--imashime-no-fukkatsu 2})
+  (:seasons overrides))
