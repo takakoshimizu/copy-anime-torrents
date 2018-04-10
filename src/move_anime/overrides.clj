@@ -1,7 +1,9 @@
 (ns move-anime.overrides)
 
-(def overrides (read-string (slurp "overrides.edn")))
-
+(def overrides
+  (let [lines (with-open [rdr (clojure.java.io/reader "overrides.edn")]
+                (reduce conj [] (line-seq rdr)))]
+    (read-string (apply str lines))))
 
 ; Sometimes titles have to be overridden for Plex.
 (def titles 

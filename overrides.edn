@@ -1,5 +1,3 @@
-; both use keywordized titles for the keys.
-; seasons uses numbers as the values, and titles uses strings
 {:seasons {:cardcaptor-sakura--clear-card-hen 4
            :nanatsu-no-taizai--imashime-no-fukkatsu 2}
  :titles {}}
